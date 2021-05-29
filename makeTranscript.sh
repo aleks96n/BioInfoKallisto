@@ -18,10 +18,6 @@
 
 #SBATCH --mem=32G
 
-#SBATCH --mail-type=END
-
-#SBATCH --mail-user=aleksnik1996@gmail.com
-
 #These commands are run on one of the nodes allocated to the job (batch node)
 kallisto index -i transcripts.idx gencode.v30.transcripts.fa
 sleep 30
