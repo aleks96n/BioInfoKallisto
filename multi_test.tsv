@@ -1,0 +1,2 @@
+qtl_subset	count_matrix	pheno_meta	sample_meta	vcf	tpm_file
+GEUVADIS_test_ge	out.tsv	gene_counts_Ensembl_96_phenotype_metadata.tsv	GEUVADIS_sample_metadata.tsv	/gpfs/hpc/projects/genomic_references/GEUVADIS/genotypes/GEUVADIS_GRCh38_filtered.vcf.gz	null.txt
