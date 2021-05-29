@@ -74,7 +74,7 @@ module load singularity/3.5.3
 nextflow run main.nf -resume --run_permutation -profile tartu_hpc   --studyFile testdata/multi_test.tsv --vcf_has_R2_field FALSE    --varid_rsid_map_file testdata/varid_rsid_map.tsv.gz --n_batches 200 --run_nominal false --email "sinu@email.com"
 ```
 
-This should create a "results" folder. Most notable file is in results/sumstats/GEUVADIS_test_ge.permuted.tsv. 
+This should create a "results" folder. Most notable file is results/sumstats/GEUVADIS_test_ge.permuted.tsv. 
 
 # Step 5 - comparing with other results
 
