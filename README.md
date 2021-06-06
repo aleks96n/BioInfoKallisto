@@ -3,7 +3,7 @@ Benchmark kallisto against HISAT2 + featureCounts in eQTL mapping
 
 # Step 1 - installing kallisto
 
-It is highly encouraged to use [HPC](https://hpc.ut.ee/en/guides/slurm/). Not only will this speed up the analysis, but will also give access to some important files that you cannot get easily without the use of HPC.
+It is highly encouraged to use [HPC](https://hpc.ut.ee/en/guides/slurm/). Not only will this speed up the analysis, but will also give access to some important files that you cannot get easily without the use of HPC. If you wish to use your own files, necessary adjustements that need to be made will be mentioned.
 
 Install [miniconda](https://docs.conda.io/en/latest/miniconda.html) for Linux, newest Python version (version 3.9 as of this edit).
 
@@ -20,7 +20,7 @@ conda install -c bioconda kallisto
 
 # Step 2 - creating the transcript file for kallisto
 
-Copy the genotype transcripts file to your work directory (where the makeTranscript.sh is located). Note that you can change the name of the transcripts.fa file, however, you will have to modify bash script for parallezation.
+Copy the genotype transcripts file to your work directory (where the makeTranscript.sh is located). Note that you can change the name of the transcripts.fa file, however, you will have to modify bash script for parallezation. 
 ```bash
 cp /gpfs/hpc/projects/genomic_references/annotations/eQTLCatalogue/v0.1/gencode.v30.transcripts.fa gencode.v30.transcripts.fa
 ```
@@ -37,7 +37,7 @@ If you want to be notified when the transcript file is created, modify the makeT
 #SBATCH --mail-user=<YOUR_EMAIL@EMAIL.DOMAIN>
 ```
 
-Run the bash script for parallelization, which is provided in the github repository. This process takes about 15 minutes. After it is finished, you should see a transcript.idx file in your work directory.
+Run the bash script for parallelization, which is provided in the github repository. This process takes about 15 minutes. After it is finished, you should see a transcript.idx file in your work directory.  Note, if you are using a different transcript file, make changes to the makeTranscript.sh change and give it the proper path.
 ```bash
 sbatch makeTranscript.sh
 ```
@@ -46,7 +46,8 @@ sbatch makeTranscript.sh
 
 It is recommended to get acquainted with [nextflow](https://github.com/AlasooLab/onboarding/blob/main/resources/nextflow.md) before moving further. However, it is optional.
 
-Run the following two commands (hopefully still on a separate stage) to create fastQ somethings. This takes approximately 3 and a half hours.
+Run the following two commands (hopefully still on a separate stage) to create fastQ somethings. This takes approximately 3 and a half hours. 
+NB! if you have your own pair of read files, you will need to drastically change the study_file.txt and give each read it's own study column and the two paths (the columns must stay the same). If you have single read files, read the kallisto [manual](https://pachterlab.github.io/kallisto/starting) for further instructions.
 ```bash
 module load java-1.8.0_40
 ./nextflow makeFastq.nf --studyFile study_file.txt
