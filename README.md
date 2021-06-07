@@ -53,7 +53,7 @@ module load java-1.8.0_40
 ./nextflow makeFastq.nf --studyFile study_file.txt
 ```
 
-Run the python script to create an out.tsv somethings and move it to the qtlmap testdata folder.
+Run the python script to create the count matrix (in the form of out.tsv). This file is around 300MB large. Move it to the qtlmap testdata folder.
 ```bash
 module load python
 python makeMatrix.py ResultsQ
@@ -72,7 +72,7 @@ Finally, run the eQTL analysis using the following command (still on a separate 
 module load java-1.8.0_40
 module load singularity/3.5.3
 
-nextflow run main.nf -resume --run_permutation -profile tartu_hpc   --studyFile testdata/multi_test.tsv --vcf_has_R2_field FALSE    --varid_rsid_map_file testdata/varid_rsid_map.tsv.gz --n_batches 200 --run_nominal false --email "sinu@email.com"
+nextflow run main.nf -resume --run_nominal false --run_permutation -profile tartu_hpc   --studyFile testdata/multi_test.tsv --vcf_has_R2_field FALSE    --varid_rsid_map_file testdata/varid_rsid_map.tsv.gz --n_batches 200 --run_nominal false --email "sinu@email.com"
 ```
 
 This should create a "results" folder. Most notable file is results/sumstats/GEUVADIS_test_ge.permuted.tsv. 
