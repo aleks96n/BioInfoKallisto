@@ -42,12 +42,12 @@ Run the bash script for parallelization, which is provided in the github reposit
 sbatch makeTranscript.sh
 ```
 
-# Step 3 - Creating fastQ somethings (Jens you got this)
+# Step 3 - Running Kallisto's quantification algorithm (creating the abundance estimates)
 
 It is recommended to get acquainted with [nextflow](https://github.com/AlasooLab/onboarding/blob/main/resources/nextflow.md) before moving further. However, it is optional.
 
-Run the following two commands (hopefully still on a separate stage) to create fastQ somethings. This takes approximately 3 and a half hours. 
-NB! if you have your own pair of read files, you will need to drastically change the study_file.txt and give each read it's own study column and the two paths (the columns must stay the same). If you have single read files, read the kallisto [manual](https://pachterlab.github.io/kallisto/starting) for further instructions.
+Run the following two commands (hopefully still on a separate stage) to create the abundance estimates. These files are in the .tsv format. This takes approximately 3 and a half hours. The result is ~45GB in size.
+NB! if you have your own pair of read files, you will need to drastically change the study_file.txt and give each read it's own study column and the two paths (the columns must stay the same). The files used in this study are available on the HPC. If you have single read files, read the kallisto [manual](https://pachterlab.github.io/kallisto/starting) for further instructions.
 ```bash
 module load java-1.8.0_40
 ./nextflow makeFastq.nf --studyFile study_file.txt
