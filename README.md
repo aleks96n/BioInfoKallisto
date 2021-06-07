@@ -63,7 +63,9 @@ mv out.tsv qtlmap/testdata/out.tsv
 
 The generated expression matrix includes the X and Y chromosomes, however these are missing from the genotype data. The simplest solution, which was used for this project, was to filter the phenotype_metadata file in such a way, that only the chromosomes 1 to 22 remain. This means filtering out X, Y and MT. These can either be removed manually from the file or you could use the phenotype_metadata_chromosome_xymt_remover.R.
 
-Modify this file and change the path to where the original phenotype metada file is is located. Then run this file in the same folder as the phenotype_metadata.tsv. An output is a file called "phenotype_metadata_xymt_removed.tsv". This will be used in the eQTL analysis.
+The original phenotype metadata file can be found at /gpfs/hpc/projects/genomic_references/annotations/eQTLCatalogue/v0.1/phenotype_metadata/gene_counts_Ensembl_96_phenotype_metadata.tsv.gz. Use gunzip to unzip it. 
+
+Modify the R script file and change the path to where the original phenotype metada file is is located. Then run this file in the same folder as the phenotype_metadata.tsv. An output is a file called "phenotype_metadata_xymt_removed.tsv". This will be used in the eQTL analysis.
 
 # Step 5 - Running the eQTL analysis
 
@@ -71,6 +73,8 @@ Navigate to the qtlmap directory
 ```bash
 cd qtlmap
 ```
+
+Make sure the file references in qtlmap/testdata/multi_test.tsv match the files in the folder.
 
 Finally, run the eQTL analysis using the following command (still on a separate stage). Note the end of the command asks for your email - this is for notifying when the work is done.
 ```bash
