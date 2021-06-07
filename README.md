@@ -94,4 +94,4 @@ hisat <-  read.csv("<comparison_file.tsv>", sep = '\t', header = TRUE)
 kallista <- read.csv("<kallisto.tsv>", sep = '\t', header = TRUE)
 ```
 
-
+After the correct file paths are added, simply run the script and the result should be a plot.
