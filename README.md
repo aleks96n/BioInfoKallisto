@@ -53,14 +53,19 @@ module load java-1.8.0_40
 ./nextflow makeFastq.nf --studyFile study_file.txt
 ```
 
-Run the python script to create the count matrix (in the form of out.tsv). This file is around 300MB large. Move it to the qtlmap testdata folder.
+Run the python script to create the count matrix (in the form of out.tsv) for the eQTL analysis. This file is around 300MB large. Move it to the qtlmap testdata folder.
 ```bash
 module load python
 python makeMatrix.py ResultsQ
 mv out.tsv qtlmap/testdata/out.tsv
 ```
+# Step 4 - Filtering the phenotype metadata
 
-# Step 4 - Running the eQTL analysis
+The generated expression matrix includes the X and Y chromosomes, however these are missing from the genotype data. The simplest solution, which was used for this project, was to filter the phenotype_metadata file in such a way, that only the chromosomes 1 to 22 remain. This means filtering out X, Y and MT. These can either be removed manually from the file or you could use the phenotype_metadata_chromosome_xymt_remover.R.
+
+Simply run this file in the same folder as the phenotype_metadata.tsv. An output is a file called "phenotype_metadata_xymt_removed.tsv". This will be used in the eQTL analysis.
+
+# Step 5 - Running the eQTL analysis
 
 Navigate to the qtlmap directory
 ```bash
