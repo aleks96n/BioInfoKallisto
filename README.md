@@ -13,7 +13,7 @@ scp <filename> user@rocket.hpc.ut.ee:directoy
 bash <conda file>
 ```
 
-Restart HPC before doing executing any more commands. After restarting, run the following command to install kallisto.
+Restart HPC before executing any more commands. After restarting, run the following command to install kallisto.
 ```bash
 conda install -c bioconda kallisto
 ```
@@ -61,7 +61,7 @@ mv out.tsv qtlmap/testdata/out.tsv
 ```
 # Step 4 - Filtering the phenotype metadata
 
-The generated expression matrix includes the X and Y chromosomes, however these are missing from the genotype data. The simplest solution, which was used for this project, was to filter the phenotype_metadata file in such a way, that only the chromosomes 1 to 22 remain. This means filtering out X, Y and MT. These can either be removed manually from the file or you could use the phenotype_metadata_chromosome_xymt_remover.R.
+The generated expression matrix includes the X and Y chromosomes, however these are missing from the genotype data. The simplest solution, which was used for this project, was to filter the phenotype_metadata file in such a way, that only the chromosomes 1 to 22 remain. This means filtering out X, Y and MT. These can either be removed manually from the file or you could use the phenotype_metadata_chromosome_xymt_remover.R script.
 
 The original phenotype metadata file can be found at /gpfs/hpc/projects/genomic_references/annotations/eQTLCatalogue/v0.1/phenotype_metadata/gene_counts_Ensembl_96_phenotype_metadata.tsv.gz. Use gunzip to unzip it. 
 
@@ -88,7 +88,7 @@ This should create a "results" folder. Most notable file is results/sumstats/GEU
 
 # Step 6 - comparing with other results
 
-Note that you require the kallisto file that you got from Step 4 and another .tsv file for comparison. In order to create the comparison, modify the "eQTLcomparison.r" script by adding appropriate file paths.
+Note that you require the kallisto file that you got from Step 5 and another .tsv file for comparison. In order to create the comparison, modify the "eQTLcomparison.r" script by adding appropriate file paths.
 ```bash
 hisat <-  read.csv("<comparison_file.tsv>", sep = '\t', header = TRUE)
 kallista <- read.csv("<kallisto.tsv>", sep = '\t', header = TRUE)
