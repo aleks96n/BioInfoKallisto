@@ -37,7 +37,12 @@ If you want to be notified when the transcript file is created, modify the makeT
 #SBATCH --mail-user=<YOUR_EMAIL@EMAIL.DOMAIN>
 ```
 
-Note! If you at any point have issues with running script files due to a DOS line break error (\r\n) then use the command "sed -i 's/^M//' script_name.sh". More can be found here: https://wikis.ovgu.de/hpc/doku.php?id=guide:dos_unix_linebreaks
+Note! If you at any point have issues with running script files due to a DOS line break error (\r\n) then use the command 
+
+```bash
+sed -i 's/^M//' script_name.sh
+'''
+More can be found here: https://wikis.ovgu.de/hpc/doku.php?id=guide:dos_unix_linebreaks
 
 Run the bash script for parallelization, which is provided in the github repository. This process takes about 15 minutes. After it is finished, you should see a transcript.idx file in your work directory.  Note, if you are using a different transcript file, make changes to the makeTranscript.sh change and give it the proper path.
 ```bash
