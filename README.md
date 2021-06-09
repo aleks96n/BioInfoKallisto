@@ -37,7 +37,7 @@ If you want to be notified when the transcript file is created, modify the makeT
 #SBATCH --mail-user=<YOUR_EMAIL@EMAIL.DOMAIN>
 ```
 
-Note! If you at any point have issues with running script files due to a DOS line break error (\r\n) then use the command 
+HINT: If you at any point have issues with running script files due to a DOS line break error (\r\n) then use the command 
 ```bash
 sed -i 's/^M//' script_name.sh
 ```
@@ -53,6 +53,8 @@ sbatch makeTranscript.sh
 It is recommended to get acquainted with [nextflow](https://github.com/AlasooLab/onboarding/blob/main/resources/nextflow.md) before moving further. However, it is optional.
 
 Run the following two commands (hopefully still on a separate stage) to create the abundance estimates. These files are in the .tsv format. This takes approximately 3 and a half hours. The result is ~45GB in size.
+
+HINT: you might get the permission denied error. In this case, it might help if you move nextflow into your user's directory (~) and execute it from there.
 
 NB! if you have your own pair of read files, you will need to drastically change the study_file.txt and give each read it's own study column and the two paths (the columns must stay the same). The files used in this study are available on the HPC. If you have single read files, read the kallisto [manual](https://pachterlab.github.io/kallisto/starting) for further instructions.
 ```bash
