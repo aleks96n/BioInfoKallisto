@@ -13,7 +13,7 @@ scp <filename> user@rocket.hpc.ut.ee:directoy
 bash <conda file>
 ```
 
-Restart HPC before doing executing any more commands. After restarting, run the following command to install kallisto.
+Restart HPC before executing any more commands. After restarting, run the following command to install kallisto.
 ```bash
 conda install -c bioconda kallisto
 ```
@@ -47,6 +47,7 @@ sbatch makeTranscript.sh
 It is recommended to get acquainted with [nextflow](https://github.com/AlasooLab/onboarding/blob/main/resources/nextflow.md) before moving further. However, it is optional.
 
 Run the following two commands (hopefully still on a separate stage) to create the abundance estimates. These files are in the .tsv format. This takes approximately 3 and a half hours. The result is ~45GB in size.
+
 NB! if you have your own pair of read files, you will need to drastically change the study_file.txt and give each read it's own study column and the two paths (the columns must stay the same). The files used in this study are available on the HPC. If you have single read files, read the kallisto [manual](https://pachterlab.github.io/kallisto/starting) for further instructions.
 ```bash
 module load java-1.8.0_40
@@ -61,7 +62,7 @@ mv out.tsv qtlmap/testdata/out.tsv
 ```
 # Step 4 - Filtering the phenotype metadata
 
-The generated expression matrix includes the X and Y chromosomes, however these are missing from the genotype data. The simplest solution, which was used for this project, was to filter the phenotype_metadata file in such a way, that only the chromosomes 1 to 22 remain. This means filtering out X, Y and MT. These can either be removed manually from the file or you could use the phenotype_metadata_chromosome_xymt_remover.R.
+The generated expression matrix includes the X and Y chromosomes, however these are missing from the genotype data. The simplest solution, which was used for this project, was to filter the phenotype_metadata file in such a way, that only the chromosomes 1 to 22 remain. This means filtering out X, Y and MT. These can either be removed manually from the file or you could use the phenotype_metadata_chromosome_xymt_remover.R script.
 
 The original phenotype metadata file can be found at /gpfs/hpc/projects/genomic_references/annotations/eQTLCatalogue/v0.1/phenotype_metadata/gene_counts_Ensembl_96_phenotype_metadata.tsv.gz. Use gunzip to unzip it. 
 
@@ -81,14 +82,14 @@ Finally, run the eQTL analysis using the following command (still on a separate 
 module load java-1.8.0_40
 module load singularity/3.5.3
 
-nextflow run main.nf -resume --run_nominal false --run_permutation -profile tartu_hpc   --studyFile testdata/multi_test.tsv --vcf_has_R2_field FALSE    --varid_rsid_map_file testdata/varid_rsid_map.tsv.gz --n_batches 200 --run_nominal false --email "sinu@email.com"
+nextflow run main.nf -profile tartu_hpc   --studyFile testdata/multi_test.tsv --vcf_has_R2_field FALSE    --varid_rsid_map_file testdata/varid_rsid_map.tsv.gz --n_batches 200 --run_nominal false --email "sinu@email.com"
 ```
 
 This should create a "results" folder. Most notable file is results/sumstats/GEUVADIS_test_ge.permuted.tsv. 
 
 # Step 6 - comparing with other results
 
-Note that you require the kallisto file that you got from Step 4 and another .tsv file for comparison. In order to create the comparison, modify the "eQTLcomparison.r" script by adding appropriate file paths.
+Note that you require the kallisto file that you got from Step 5 and another .tsv file for comparison. In order to create the comparison, modify the "eQTLcomparison.r" script by adding appropriate file paths.
 ```bash
 hisat <-  read.csv("<comparison_file.tsv>", sep = '\t', header = TRUE)
 kallista <- read.csv("<kallisto.tsv>", sep = '\t', header = TRUE)
