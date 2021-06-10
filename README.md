@@ -85,6 +85,15 @@ cd qtlmap
 
 Make sure the file references in qtlmap/testdata/multi_test.tsv match the files in the folder.
 
+Also, running the nextflow command below could result in a command error where it states that qtlmap/bin/QTLtools: Permission Denied. 
+In this case, give execution rights to the QTLtools file:
+
+```
+chmod u+x bin/QTLtools
+```
+
+If you did get the permission error during execution of the nextflow command below, and you fixed it with the above chmod command, you can resume where you left off by running the same command again with the -resume flag. Without the -resume flag, the nextflow will execute from the beginning.
+
 Finally, run the eQTL analysis using the following command (still on a separate stage). Note the end of the command asks for your email - this is for notifying when the work is done.
 ```bash
 module load java-1.8.0_40
